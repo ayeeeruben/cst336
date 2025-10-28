@@ -31,11 +31,53 @@ app.get('/characters',async (req, res) => {
 });
 
 app.get('/episodes', async (req, res) => {
-  const episodeNumber = req.query.episodeNumber;
-  const response = await fetch(`https://rickandmortyapi.com/api/episode/${episodeNumber}`);
-  const data = await response.json();
+  try {
+    const episodeNumber = req.query.episodeNumber;
 
-  res.render('episodeInfo.ejs', { episode: data });
+    // first load: just show form
+    if (!episodeNumber) {
+      return res.render('episodeInfo.ejs', { episode: null, season: null, characters: [] });
+    }
+
+    const epRes = await fetch(`https://rickandmortyapi.com/api/episode/${episodeNumber}`);
+    const episode = await epRes.json();
+
+    if (episode.error) {
+      return res.status(404).send('Episode not found');
+    }
+
+    const season = Number(episode.episode.slice(1, 3));
+
+    const firstFive = (episode.characters || []).slice(0, 5);
+    let characters = [];
+    if (firstFive.length) {
+      const ids = firstFive.map(u => u.split('/').pop()).join(',');
+      const chRes = await fetch(`https://rickandmortyapi.com/api/character/${ids}`);
+      const chData = await chRes.json();
+      characters = Array.isArray(chData) ? chData : [chData];
+    }
+
+    res.render('episodeInfo.ejs', { episode, season, characters });
+  } catch (e) {
+    console.error(e);
+    res.status(500).send('Server error');
+  }
+});
+
+
+app.get('/location',async (req, res) => {
+    const count = Math.min(req.query.count || 1, 10);
+
+    let ids = '';
+    for (let i = 1; i <= count; i++) {
+      ids += i + (i < count ? ',' : '');
+    }
+
+    const response = await fetch(`https://rickandmortyapi.com/api/location/${ids}`);
+    const data = await response.json();
+
+    const locations = Array.isArray(data) ? data : [data];
+    res.render('locationInfo.ejs', { locations });
 });
 
 app.listen(3000, () => {

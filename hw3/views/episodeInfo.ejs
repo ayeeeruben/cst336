@@ -15,35 +15,40 @@
 
 <body>
 
-    <h1 class="text-center bg-black p-5 text-white m-0">Rick and Morty</h1>
+   <h1 class="text-center bg-black p-5 text-white m-0">Rick and Morty</h1>
   <%- include("partials/navbar.ejs") %>
 
   <div class="container my-5">
-    <div class="row align-items-center">
-        <div class="col-md-6 text-center mb-4 mb-md-0">
-            <img src="<%= charInfo.image %>" alt="<%= charInfo.name %>" class="img-fluid rounded shadow">
-        </div>
-    <div class="col-md-6 text-black text-start">
-    <form action="/episodes" method="GET" class="text-center my-4">
-        <label for="episodeNumber" class="form-label">Enter Episode Number:</label>
-        <input 
-            type="number" 
-            id="episodeNumber" 
-            name="episodeNumber" 
-            class="form-control w-25 mx-auto" 
-            min="1" 
-            max="51" 
-            placeholder="e.g. 12"
-            required
-        >
-        <button type="submit" class="btn btn-primary mt-3">Search</button>
+
+    <!-- Number-only search form -->
+    <form action="/episodes" method="GET" class="row g-3 align-items-center mb-4">
+      <div class="col-auto">
+        <label for="episodeNumber" class="col-form-label">Episode #</label>
+      </div>
+      <div class="col-auto">
+        <input type="number" class="form-control" id="episodeNumber" name="episodeNumber" min="1" required>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
     </form>
 
-      </div>
-    </div>
-  </div>
+        <% if (episode) { %>
+            <h2><%= episode.name %></h2>
+            <p>Season: <%= episode.episode %></p>
+            <p>Air Date: <%= episode.air_date %></p>
 
-  <%- include("partials/footer.ejs") %>
+            <% if (characters && characters.length) { %>
+                <h4>Top 5 Characters:</h4>
+                <ul class="list-unstyled">
+                <% characters.forEach(c => { %>
+                    <li><%= c.name %></li>
+                <% }) %>
+                </ul>
+            <% } %>
+        <% } %>
+
+  </div>
 </body>
 
 </html>
