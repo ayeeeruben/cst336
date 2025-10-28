@@ -1,0 +1,42 @@
+header{
+    padding-top: 5%;
+}
+
+body{
+    font-family: Roboto;
+    display: flex;                     /* use flexbox for page layout */
+    flex-direction: column;            /* stack children vertically */
+    text-align: center;                /* center inline text by default */
+    justify-content: center;           /* vertically center content (with min-height) */
+    align-items: center;               /* horizontally center content */
+    min-height: 100vh;                 /* fill full viewport height */
+    margin: 0;                         /* remove default body margins */
+    background-color: rgb(212, 205, 205); /* light gray page background */
+}
+button {
+    background: rgb(68, 61, 61);   /* sets a dark gray background color */
+    color: white;                  /* makes button text white */
+    border-radius: 12px;           /* rounds button corners */
+    border: none;                  /* removes default border */
+    padding: 8px 16px;            /* adds internal spacing around text */
+    cursor: pointer;               /* changes cursor to hand icon when hovering */
+    margin-top: 16px;              /* adds space above button */
+    transition: transform .2s ease;/* smooth scale animation when hovering */
+    box-sizing: border-box;        /* includes padding in total button size */
+}
+
+/* ===== Button Hover Effect ===== */
+button:hover {
+    transform: scale(1.05);        /* enlarges the button slightly when hovered */
+}
+.displayLikes{
+    display: grid;                        /* uses grid to organize dice and buttons */
+    align-items: center;                  /* vertically centers elements in each cell */
+    gap: 12px;                            /* spacing between grid items */
+    padding-top: 8px;                     /* space above the dice section */
+    grid-template-columns: 1fr 1fr 1fr;    
+    justify-items: stretch;   
+}
+#likes{
+    font-size: 20px;
+}

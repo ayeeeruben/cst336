@@ -1,0 +1,17 @@
+{
+  "name": "intro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^5.1.0",
+    "fast-shuffle": "^6.1.1",
+    "success-motivational-quotes": "^1.0.8"
+  }
+}
