@@ -15,7 +15,7 @@
 
 <body>
 
-  <h1 class="text-center bg-dark text-white p-4 m-0">Rick and Morty Locations</h1>
+  <h1 class="text-center bg-black text-white p-4 m-0">Rick and Morty Locations</h1>
     <%- include("partials/navbar.ejs") %>
 
   <div class="container my-4">
@@ -27,7 +27,7 @@
 
     <% if (locations && locations.length) { %>
       <% locations.forEach(loc => { %>
-        <div class="card shadow mb-3">
+        <div class="card shadow mb-3 text-start">
           <div class="card-body">
             <h5 class="card-title"><%= loc.name %></h5>
             <p><strong>Type:</strong> <%= loc.type %></p>
@@ -38,6 +38,7 @@
       <% }) %>
     <% } %>
   </div>
+    <%- include("partials/footer.ejs") %>
 </body>
 
 </html>

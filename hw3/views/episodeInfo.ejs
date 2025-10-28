@@ -18,9 +18,7 @@
    <h1 class="text-center bg-black p-5 text-white m-0">Rick and Morty</h1>
   <%- include("partials/navbar.ejs") %>
 
-  <div class="container my-5">
-
-    <!-- Number-only search form -->
+  <div class="container my-4">
     <form action="/episodes" method="GET" class="row g-3 align-items-center mb-4">
       <div class="col-auto">
         <label for="episodeNumber" class="col-form-label">Episode #</label>
@@ -32,23 +30,36 @@
         <button type="submit" class="btn btn-primary">Search</button>
       </div>
     </form>
-
-        <% if (episode) { %>
-            <h2><%= episode.name %></h2>
-            <p>Season: <%= episode.episode %></p>
-            <p>Air Date: <%= episode.air_date %></p>
-
-            <% if (characters && characters.length) { %>
-                <h4>Top 5 Characters:</h4>
-                <ul class="list-unstyled">
-                <% characters.forEach(c => { %>
-                    <li><%= c.name %></li>
-                <% }) %>
-                </ul>
-            <% } %>
-        <% } %>
-
   </div>
+
+    <h2>Episode Information:</h2>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8"> 
+                <div class="card shadow text-start">
+                    <div class="card-body">
+                        <% if (episode) { %>
+                            <h2 class="card-title"><%= episode.name %></h2>
+                            <p>Season: <%= episode.episode %></p>
+                            <p>Air Date: <%= episode.air_date %></p>
+
+                            <% if (characters && characters.length) { %>
+                                <h4>Top 5 Characters:</h4>
+                                <ul class="list-unstyled">
+                                    <% characters.forEach(c => { %>
+                                    <li><%= c.name %></li>
+                                    <% }) %>
+                                </ul>
+                            <% } %>
+                        <% } %>        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("partials/footer.ejs") %>
 </body>
 
 </html>
