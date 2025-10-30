@@ -27,11 +27,13 @@
           <em> - <%= charInfo.name %> </em>
         </div>
       </div>
-      <div class="col-md-6 text-white text-start">
-        <h2 class="mb-3"><%= charInfo.name %></h2>
-        <p>Status: <%= charInfo.status %></p>
-        <p>Species: <%= charInfo.species %></p>
-        <p>Origin: <%= charInfo.origin.name %></p>
+      <div class="col-md-6">
+        <div class="card bg-dark bg-opacity-75 text-white p-3 shadow">
+          <h2 class="mb-3"><%= charInfo.name %></h2>
+          <p>Status: <%= charInfo.status %></p>
+          <p>Species: <%= charInfo.species %></p>
+          <p>Origin: <%= charInfo.origin.name %></p>
+        </div>
       </div>
     </div>
   </div>
