@@ -1,5 +1,7 @@
 import express from 'express';
-// import fetch from 'node-fetch';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const rm = require('rick-and-morty-forever');// import fetch from 'node-fetch';
 // const solarSystem = (await import('npm-solarsystem')).default;
 // hey hello hi
 
@@ -27,15 +29,16 @@ app.get('/characters',async (req, res) => {
       return res.status(404).send(`Character "${character_name}" not found`);
     }
     const charInfo = data.results[0];
+    const key = charInfo.name.split(' ')[0].toLowerCase();
+    const quote = rm(key);
 
-    res.render('characterInfo.ejs', { charInfo });
+    res.render('characterInfo.ejs', { charInfo, quote });
 });
 
 app.get('/episodes', async (req, res) => {
   try {
     const episodeNumber = req.query.episodeNumber;
 
-    // first load: just show form
     if (!episodeNumber) {
       return res.render('episodeInfo.ejs', { episode: null, season: null, characters: [] });
     }
@@ -57,7 +60,6 @@ app.get('/episodes', async (req, res) => {
       const chData = await chRes.json();
       characters = Array.isArray(chData) ? chData : [chData];
     }
-
     res.render('episodeInfo.ejs', { episode, season, characters });
   } catch (e) {
     console.error(e);
